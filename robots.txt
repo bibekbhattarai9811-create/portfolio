@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bibek-bhattarai.vercel.app/sitemap.xml
