@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TBN Store — Bibek Bhattarai</title>
+<meta name="description" content="An online storefront for a kids' clothing brand, designed around how the business actually takes orders." />
+<meta name="color-scheme" content="light" />
+<script>document.documentElement.classList.add("js")</script>
+<meta property="og:title" content="TBN Store — case study by Bibek Bhattarai" />
+<meta property="og:description" content="An online storefront for a kids' clothing brand, designed around how the business actually takes orders." />
+<meta property="og:image" content="https://bibek-bhattarai.vercel.app/img/learncivilwithme.jpg" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M6 22h20M8 22l4-10 4 10 4-10 4 10M10 17h12' stroke='%23f4f2ec' stroke-width='1.8' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="/" class="brand"><i></i>Bibek Bhattarai</a>
+    <nav>
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#contact">Contact</a>
+      <a class="btn" href="/Bibek-Bhattarai-CV.pdf" download>CV
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9m0 0 3.5-3.5M8 11 4.5 7.5M3 14h10"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="wrap">
+    <div class="case-hero">
+      <a class="back mono" href="/#work">← All work</a>
+      <span class="mono kicker">Case study 03 · E-commerce · 2026</span>
+      <h1>TBN Store</h1>
+      <p class="lede">An online storefront for a kids' clothing brand, designed around how the business actually takes orders.</p>
+      <div class="meta">
+        <div><span class="mono">Role</span><p>Design and full-stack development</p></div>
+        <div><span class="mono">Timeline</span><p>August 2026</p></div>
+        <div><span class="mono">Stack</span><p>Next.js 16, Prisma, PostgreSQL, Auth.js, Resend, Vercel</p></div>
+        <div><span class="mono">Links</span><p><a href="https://tbnstore.vercel.app" target="_blank" rel="noopener">Live site ↗</a> · <a href="https://github.com/bibekbhattarai9811-create/tbn-store" target="_blank" rel="noopener">Source ↗</a></p></div>
+      </div>
+      <div class="case-cover">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><span>tbnstore.vercel.app</span></div>
+          <img src="/img/tbnstore.webp" srcset="/img/tbnstore-720.webp 720w, /img/tbnstore.webp 1200w" sizes="(max-width: 1240px) 100vw, 1200px"
+            width="1200" height="750" alt="TBN Store homepage" fetchpriority="high" decoding="async" /></div>
+      </div>
+    </div>
+
+      <section class="cs">
+        <header class="rv"><span class="mono">Overview</span><h2>The brief</h2></header>
+        <div class="cs-body rv"><p>TBN Store sells sweaters, tracksuits and matching outfit sets for kids. It serves customers who may prefer Nepali, and it confirms every order by phone, for sizing and delivery, before anything is paid.</p><p>So the site needed to feel like a real shop, with search, categories, reviews and wishlists, without forcing a card checkout that didn't match how the business works.</p></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Approach</span><h2>What I built</h2></header>
+        <div class="cs-body rv"><ol class="steps"><li><div><h3>Book now, confirm by phone</h3><p>Instead of a payment checkout, customers book the items they like, and the store calls to confirm size and delivery. The flow matches how orders are actually fulfilled.</p></div></li><li><div><h3>A complete catalog</h3><p>Categories, trending items, search and sorting, product pages with image galleries and a size guide, plus reviews and wishlists.</p></div></li><li><div><h3>Bilingual by design</h3><p>English and Nepali (नेपाली) with a one-tap toggle. Translations live in the database, so the owner can edit them without touching code.</p></div></li><li><div><h3>Tools that drive repeat sales</h3><p>Coupons, referral codes and back-in-stock notifications, with transactional emails sent through Resend.</p></div></li><li><div><h3>An admin dashboard</h3><p>Manage products, images, categories, stock, bookings, coupons and site settings in one place.</p></div></li></ol></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Decisions</span><h2>Key decisions</h2></header>
+        <div class="cs-body rv"><div class="decisions"><div><h3>Relational data model</h3><p>Thirteen Prisma models (users, products, images, bookings, coupons, reviews, wishlists, referrals, translations and more) keep the business rules in the database, not scattered through pages.</p></div><div><h3>Built to be found</h3><p>Generated sitemap, robots rules and per-page Open Graph images, so products look right when shared on social media.</p></div><div><h3>Prices in rupees, mobile first</h3><p>Prices are in rupees and the layout is designed phone-first.</p></div><div><h3>Safe deploys</h3><p>Database migrations run as part of every production build, so the schema and the code never drift apart.</p></div></div></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Next</span><h2>What I'd do next</h2></header>
+        <div class="cs-body rv"><p>Add online payment as an option alongside booking, and a simple sales dashboard so the owner can see which products and sizes sell best.</p></div>
+      </section>
+
+    <div class="gallery">
+        <figure class="rv wide">
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><span>tbnstore.vercel.app/products</span></div>
+            <img src="/img/case/tbn-products.webp" srcset="/img/case/tbn-products-720.webp 720w, /img/case/tbn-products.webp 1200w" sizes="(max-width: 960px) 100vw, 1200px"
+              width="1200" height="750" alt="Product grid with sweaters and prices in rupees" loading="lazy" decoding="async" /></div>
+          <figcaption class="mono">The full catalog with search, sorting and rupee pricing.</figcaption>
+        </figure>
+    </div>
+
+    <a class="next" href="/work/pyquest/">
+      <span class="mono">Next project</span>
+      <strong>PyQuest <span>→</span></strong>
+    </a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="yr">2026</span> Bibek Bhattarai</span>
+    <span id="clock">Jonesboro, AR</span>
+    <a href="/">Home ↑</a>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
