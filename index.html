@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bibek Bhattarai</title>
+<meta name="description" content="Bibek Bhattarai is a Data Science and Civil Engineering student at Arkansas State University. Selected projects in machine learning, web software and engineering." />
+<meta name="color-scheme" content="light" />
+<script>document.documentElement.classList.add("js")</script>
+<meta property="og:title" content="Bibek Bhattarai — Data Science & Civil Engineering" />
+<meta property="og:description" content="Selected projects in machine learning, web software and engineering." />
+<meta property="og:image" content="https://bibek-bhattarai.vercel.app/img/learncivilwithme.jpg" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M6 22h20M8 22l4-10 4 10 4-10 4 10M10 17h12' stroke='%23f4f2ec' stroke-width='1.8' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
+<style>
+  :root {
+    --paper: #f4f2ec;
+    --paper-2: #ebe8df;
+    --ink: #121212;
+    --ink-2: #3a3a38;
+    --muted: #75736c;
+    --line: #dcd8cd;
+    --accent: #d4471b;
+    --max: 1240px;
+    --gutter: clamp(16px, 4vw, 48px);
+    --display: "Inter Tight", "Inter", system-ui, sans-serif;
+    --body: "Inter", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --serif: "Instrument Serif", Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--ink); color: var(--paper); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); }
+  .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+  /* nav */
+  header.nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+  header.nav.scrolled { border-bottom-color: var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--display); font-weight: 500; font-size: 16px; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+  .brand i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .nav nav { display: flex; align-items: center; gap: 28px; font-size: 14px; color: var(--ink-2); }
+  .nav nav a:not(.btn) { position: relative; }
+  .nav nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  .nav nav a:not(.btn):hover::after { transform: scaleX(1); }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 14px; font-weight: 500;
+    border: 1px solid var(--ink); transition: background .2s, color .2s; white-space: nowrap; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { background: transparent; color: var(--ink); }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* hero */
+  .hero { padding: clamp(48px, 9vw, 120px) 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+  .hero h1 { font-family: var(--display); font-weight: 500; font-size: clamp(44px, 6.6vw, 92px); line-height: .98; letter-spacing: -.035em; margin: 22px 0 28px; }
+  .hero h1 .serif { font-size: 1.08em; }
+  .hero p.lede { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 520px; line-height: 1.55; }
+  .hero .actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+  .avail { display: inline-flex; align-items: center; gap: 10px; }
+  .avail b { width: 7px; height: 7px; border-radius: 50%; background: #2f9e44; box-shadow: 0 0 0 4px rgba(47,158,68,.15); }
+
+  figure.model { position: relative; aspect-ratio: 1 / .82; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+    background-color: #f7f5f0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 32px 32px; background-position: -1px -1px; }
+  figure.model::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(247,245,240,0) 30%, #f7f5f0 85%); pointer-events: none; }
+  figure.model canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+  figure.model canvas:active { cursor: grabbing; }
+  figure.model figcaption { position: absolute; left: 16px; right: 16px; bottom: 12px; display: flex; justify-content: space-between; gap: 12px; pointer-events: none; }
+  figure.model .tag { position: absolute; top: 14px; left: 16px; pointer-events: none; }
+  figure.model .readout { position: absolute; top: 14px; right: 16px; text-align: right; pointer-events: none; color: var(--ink-2); }
+
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); margin-top: clamp(48px, 7vw, 88px); }
+  .facts > div { padding: 18px 20px 0 0; }
+  .facts > div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .facts .mono { display: block; margin-bottom: 6px; }
+  .facts p { font-size: 15px; color: var(--ink); line-height: 1.45; }
+
+  /* sections */
+  section.block { padding: clamp(72px, 10vw, 136px) 0 0; }
+  .sec-head { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: end; padding-bottom: 28px; border-bottom: 1px solid var(--ink); margin-bottom: 48px; }
+  .sec-head h2 { font-family: var(--display); font-weight: 500; font-size: clamp(34px, 4.4vw, 60px); line-height: 1; letter-spacing: -.03em; }
+  .sec-head p { color: var(--ink-2); max-width: 560px; justify-self: end; font-size: 16px; }
+  .sec-head .mono { display: block; margin-bottom: 14px; }
+
+  /* featured projects */
+  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 64px 40px; }
+  .project.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
+  .shot { position: relative; display: block; border-radius: 6px; overflow: hidden; background: var(--paper-2); border: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(0,0,0,.02), 0 20px 40px -24px rgba(20, 18, 10, .35); }
+  .shot .bar { height: 26px; display: flex; align-items: center; gap: 6px; padding: 0 10px; background: #e6e2d8; border-bottom: 1px solid var(--line); }
+  .shot .bar i { width: 8px; height: 8px; border-radius: 50%; background: #cdc8bb; }
+  .shot .bar span { margin-left: 10px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-transform: none; letter-spacing: 0; }
+  .shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+  .project:hover .shot img { transform: scale(1.025); }
+  .p-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 22px 0 10px; }
+  .p-meta h3 { font-family: var(--display); font-weight: 500; font-size: 28px; letter-spacing: -.02em; line-height: 1.1; }
+  .project p.desc { color: var(--ink-2); font-size: 15.5px; max-width: 560px; }
+  .project.wide .p-meta { margin-top: 0; }
+  .stats { display: flex; gap: 28px; margin: 22px 0 4px; flex-wrap: wrap; }
+  .stats div strong { display: block; font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: -.02em; line-height: 1.1; }
+  .stats div span { font-size: 13px; color: var(--muted); }
+  ul.points { list-style: none; margin-top: 16px; display: grid; gap: 8px; }
+  ul.points li { position: relative; padding-left: 18px; font-size: 14.5px; color: var(--ink-2); }
+  ul.points li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 1px; background: var(--ink); }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .stack span { font-family: var(--mono); font-size: 11.5px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); }
+  .links { display: flex; gap: 20px; margin-top: 18px; font-size: 14px; font-weight: 500; }
+  .links a { display: inline-flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--ink); padding-bottom: 1px; }
+  .links a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* index table */
+  .index-title { display: flex; justify-content: space-between; align-items: baseline; margin: clamp(80px, 9vw, 120px) 0 14px; }
+  .index-title h3 { font-family: var(--display); font-weight: 500; font-size: 24px; letter-spacing: -.02em; }
+  .rows { border-top: 1px solid var(--ink); }
+  .row { display: grid; grid-template-columns: 48px 1.1fr 1.9fr 1fr 90px 24px; gap: 20px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line);
+    transition: background .25s, padding .25s; }
+  a.row:hover { background: var(--paper-2); padding-left: 12px; padding-right: 12px; }
+  .row .n { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .row h4 { font-family: var(--display); font-weight: 500; font-size: 19px; letter-spacing: -.01em; line-height: 1.25; }
+  .row h4 small { display: block; font-family: var(--body); font-weight: 400; font-size: 13px; color: var(--muted); letter-spacing: 0; margin-top: 2px; }
+  .row p { font-size: 14.5px; color: var(--ink-2); }
+  .row .st { font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+  .row .yr { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
+  .row .ar { text-align: right; color: var(--muted); transition: transform .25s, color .25s; }
+  a.row:hover .ar { transform: translate(3px, -3px); color: var(--accent); }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; }
+  .about .big { font-family: var(--display); font-weight: 400; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.28; letter-spacing: -.02em; }
+  .about .big .serif { font-size: 1.1em; }
+  .about .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; color: var(--ink-2); font-size: 15.5px; }
+
+  /* timeline tables */
+  .tables { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .tables h3 { font-family: var(--display); font-weight: 500; font-size: 20px; letter-spacing: -.01em; padding-bottom: 14px; border-bottom: 1px solid var(--ink); }
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .item h4 { font-weight: 500; font-size: 16px; }
+  .item .when { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+  .item .org { grid-column: 1 / -1; font-size: 14.5px; color: var(--ink-2); }
+  .item .note { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
+  .item .honor { grid-column: 1 / -1; display: inline-flex; gap: 8px; align-items: center; font-size: 13.5px; color: var(--ink); margin-top: 4px; }
+  .item .honor::before { content: ""; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+  /* certifications */
+  .certs { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; }
+  .cert-group + .cert-group { margin-top: 36px; }
+  .cert-group h4 { display: flex; justify-content: space-between; font-weight: 500; font-size: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+  .cert-group h4 span { font-family: var(--mono); font-size: 12px; color: var(--muted); font-weight: 400; }
+  .cert-list a { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 15px; transition: color .2s, padding .25s; }
+  .cert-list a span { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .cert-list a:hover { color: var(--accent); padding-left: 8px; }
+  .cert-list.two { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+
+  /* skills */
+  .cap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  #sphere { position: relative; height: 460px; margin-top: 8px; cursor: grab; touch-action: none; user-select: none; }
+  #sphere:active { cursor: grabbing; }
+  #sphere span { position: absolute; left: 50%; top: 50%; white-space: nowrap; font-family: var(--display); font-weight: 500;
+    font-size: 19px; letter-spacing: -.01em; color: var(--ink); will-change: transform, opacity; transition: color .3s; }
+  #sphere span.front { color: var(--accent); }
+  .sphere-hint { display: block; text-align: center; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .skills h4 { font-weight: 500; font-size: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--ink); margin-bottom: 12px; }
+  .skills li { list-style: none; font-size: 15px; color: var(--ink-2); padding: 5px 0; }
+
+  /* contact */
+  .contact { padding: clamp(96px, 12vw, 168px) 0 64px; }
+  .contact .mono { display: block; margin-bottom: 22px; }
+  .contact h2 { font-family: var(--display); font-weight: 500; font-size: clamp(44px, 8vw, 116px); line-height: .95; letter-spacing: -.04em; }
+  .contact .mail { display: inline-block; margin-top: 36px; font-family: var(--display); font-size: clamp(20px, 2.8vw, 34px); letter-spacing: -.02em; border-bottom: 2px solid var(--ink); padding-bottom: 4px; transition: color .2s, border-color .2s; overflow-wrap: anywhere; }
+  .contact .mail:hover { color: var(--accent); border-color: var(--accent); }
+  .contact .actions { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* reveal */
+  .js .rv { opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .js .rv.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .project.wide, .about, .tables, .certs, .cap, .sec-head { grid-template-columns: 1fr; }
+    #sphere { height: 360px; }
+    .sec-head p { justify-self: start; }
+    .projects { grid-template-columns: 1fr; gap: 56px; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts > div:nth-child(3) { padding-left: 0; border-left: 0; }
+    .row { grid-template-columns: 36px 1fr 24px; }
+    .row p, .row .st, .row .yr { grid-column: 2 / 3; text-align: left; }
+    .row .ar { grid-column: 3; grid-row: 1; }
+  }
+  @media (max-width: 640px) {
+    .nav nav a:not(.btn) { display: none; }
+    .about .cols, .cert-list.two { grid-template-columns: 1fr; }
+    .facts { grid-template-columns: 1fr; }
+    .facts > div + div { padding-left: 0; border-left: 0; }
+    .skills { grid-template-columns: 1fr 1fr; gap: 24px; }
+    figure.model { aspect-ratio: 1 / 1; }
+    figure.model .tag { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a href="#top" class="brand"><i></i>Bibek Bhattarai</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="Bibek-Bhattarai-CV.pdf" download>CV
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9m0 0 3.5-3.5M8 11 4.5 7.5M3 14h10"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="mono avail"><b></b>Open to internships</span>
+          <h1>I analyze data and design <span class="serif">structures.</span></h1>
+          <p class="lede">I'm a Data Science and Civil Engineering student at Arkansas State University. I build machine-learning models, web software and tools that help people learn engineering.</p>
+          <div class="actions">
+            <a class="btn solid" href="#work">View selected work</a>
+            <a class="btn" href="Bibek-Bhattarai-CV.pdf" download>Download CV</a>
+          </div>
+        </div>
+        <figure class="model" aria-label="Interactive 3D model of a Warren truss bridge with a moving point load">
+          <canvas id="truss"></canvas>
+          <span class="mono tag">Fig. 01 — Warren truss</span>
+          <span class="mono readout" id="readout">P = 10 kN · x = 0.0 m<br />δ<sub>max</sub> = 0.00 mm</span>
+          <figcaption class="mono"><span>Moving point load, deflection ×1500</span><span>Drag to rotate</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="facts rv">
+        <div><span class="mono">Based in</span><p>Jonesboro, Arkansas<br />From Kathmandu, Nepal</p></div>
+        <div><span class="mono">Studying</span><p>B.S. Data Science &amp; Data Analytics, plus Civil Engineering</p></div>
+        <div><span class="mono">Recognition</span><p>Dean's List<br />Fall 2025 and Spring 2026</p></div>
+        <div><span class="mono">Credentials</span><p>IBM, Anthropic and 10 DataCamp courses</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="mono">(01) Selected work</span><h2>Projects</h2></div>
+        <p>Eleven projects across machine learning, full-stack software and engineering education. Five are featured below and the rest are in the index.</p>
+      </div>
+
+      <div class="projects">
+        <article class="project wide rv">
+          <a class="shot" href="https://learncivilwithme.vercel.app" target="_blank" rel="noopener">
+            <div class="bar"><i></i><i></i><i></i><span>learncivilwithme.vercel.app</span></div>
+            <img src="img/learncivilwithme.webp" srcset="img/learncivilwithme-720.webp 720w, img/learncivilwithme.webp 1200w" sizes="(max-width: 960px) 100vw, 50vw" width="1200" height="750" decoding="async" alt="LearnCivilWithMe dashboard showing progress toward the PE license and the next study tasks" loading="lazy" />
+          </a>
+          <div>
+            <div class="p-meta"><h3>LearnCivilWithMe</h3><span class="mono">2026</span></div>
+            <p class="desc">A free, self-paced path from day one to a US civil engineering license, built for students who can't rely on classes alone.</p>
+            <div class="stats">
+              <div><strong>94</strong><span>tasks in 9 phases</span></div>
+              <div><strong>145</strong><span>FE-style questions</span></div>
+              <div><strong>6</strong><span>engineering calculators</span></div>
+            </div>
+            <ul class="points">
+              <li>Every task links to vetted, mostly free resources</li>
+              <li>Beam, section, Manning's flow and concrete calculators checked against hand calculations</li>
+              <li>Optional accounts with cloud-synced progress</li>
+            </ul>
+            <div class="stack"><span>Next.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Vercel</span></div>
+            <div class="links">
+              <a href="https://learncivilwithme.vercel.app" target="_blank" rel="noopener">Live site ↗</a>
+              <a href="https://github.com/bibekbhattarai9811-create/learncivilwithme" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project rv">
+          <a class="shot" href="https://equipguard-beige.vercel.app" target="_blank" rel="noopener">
+            <div class="bar"><i></i><i></i><i></i><span>equipguard · fleet overview</span></div>
+            <img src="img/equipguard.webp" srcset="img/equipguard-720.webp 720w, img/equipguard.webp 1200w" sizes="(max-width: 960px) 100vw, 50vw" width="1200" height="750" decoding="async" alt="EquipGuard fleet dashboard ranking 100 pumps by predicted failure risk" loading="lazy" />
+          </a>
+          <div class="p-meta"><h3>EquipGuard</h3><span class="mono">Machine learning · 2026</span></div>
+          <p class="desc">Predictive maintenance for a fleet of 100 industrial pumps. Gradient-boosted models forecast remaining useful life and near-term failure risk from sensor telemetry.</p>
+          <div class="stats">
+            <div><strong>0.93</strong><span>ROC-AUC, failure risk</span></div>
+            <div><strong>16.6</strong><span>cycles MAE, remaining life</span></div>
+          </div>
+          <div class="stack"><span>Python</span><span>scikit-learn</span><span>FastAPI</span><span>Next.js</span></div>
+          <div class="links">
+            <a href="https://equipguard-beige.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/bibekbhattarai9811-create/equipguard" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project rv">
+          <a class="shot" href="https://tbnstore.vercel.app" target="_blank" rel="noopener">
+            <div class="bar"><i></i><i></i><i></i><span>tbnstore.vercel.app</span></div>
+            <img src="img/tbnstore.webp" srcset="img/tbnstore-720.webp 720w, img/tbnstore.webp 1200w" sizes="(max-width: 960px) 100vw, 50vw" width="1200" height="750" decoding="async" alt="TBN Store homepage for a kids' clothing brand" loading="lazy" />
+          </a>
+          <div class="p-meta"><h3>TBN Store</h3><span class="mono">E-commerce · 2026</span></div>
+          <p class="desc">A bilingual English and Nepali storefront for a kids' clothing brand, with catalog search, wishlists, reviews, coupons, stock alerts, a booking flow and an admin dashboard.</p>
+          <div class="stack"><span>Next.js</span><span>Prisma</span><span>PostgreSQL</span><span>Auth.js</span><span>Resend</span></div>
+          <div class="links">
+            <a href="https://tbnstore.vercel.app" target="_blank" rel="noopener">Live site ↗</a>
+            <a href="https://github.com/bibekbhattarai9811-create/tbn-store" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project rv">
+          <a class="shot" href="https://pyquest-4h36.vercel.app" target="_blank" rel="noopener">
+            <div class="bar"><i></i><i></i><i></i><span>pyquest</span></div>
+            <img src="img/pyquest.webp" srcset="img/pyquest-720.webp 720w, img/pyquest.webp 1200w" sizes="(max-width: 960px) 100vw, 50vw" width="1200" height="750" decoding="async" alt="PyQuest landing page: learn Python by writing it" loading="lazy" />
+          </a>
+          <div class="p-meta"><h3>PyQuest</h3><span class="mono">Education · 2026</span></div>
+          <p class="desc">Learn Python by writing it. 83 short lessons with a real Python runtime in the browser, instant answer checking and saved progress, with nothing to install.</p>
+          <div class="stack"><span>Next.js</span><span>Pyodide</span><span>Web Workers</span><span>Prisma</span></div>
+          <div class="links">
+            <a href="https://pyquest-4h36.vercel.app" target="_blank" rel="noopener">Live site ↗</a>
+            <a href="https://github.com/bibekbhattarai9811-create/pyquest" target="_blank" rel="noopener">Source ↗</a>
+          </div>
+        </article>
+
+        <article class="project rv">
+          <div class="shot">
+            <div class="bar"><i></i><i></i><i></i><span>videoforge · local app</span></div>
+            <img src="img/videoforge.webp" srcset="img/videoforge-720.webp 720w, img/videoforge.webp 1200w" sizes="(max-width: 960px) 100vw, 50vw" width="1200" height="750" decoding="async" alt="VideoForge new-video screen with idea, format, length and voice options" loading="lazy" />
+          </div>
+          <div class="p-meta"><h3>VideoForge</h3><span class="mono">Automation · 2026</span></div>
+          <p class="desc">Turns a video idea into a finished MP4: an AI-written script and shot list, neural voice-over with word-synced captions, and an automatically edited timeline. It produces the videos for Why It Broke.</p>
+          <div class="stack"><span>Python</span><span>MoviePy</span><span>Claude</span><span>Next.js</span></div>
+        </article>
+      </div>
+
+      <div class="index-title rv"><h3>Index</h3><span class="mono">All other projects</span></div>
+      <div class="rows rv">
+        <a class="row" href="https://github.com/bibekbhattarai9811-create/service-marketplace" target="_blank" rel="noopener">
+          <span class="n">06</span>
+          <h4>Service Marketplace<small>Full-stack · mobile</small></h4>
+          <p>Connects customers with skilled workers: role-based accounts, real-time chat, Stripe payments, maps, disputes and admin moderation.</p>
+          <span class="st">FastAPI · PostgreSQL · React · Capacitor</span>
+          <span class="yr">2026</span><span class="ar">↗</span>
+        </a>
+        <a class="row" href="https://github.com/bibekbhattarai9811-create/traffic-accident-severity-project" target="_blank" rel="noopener">
+          <span class="n">07</span>
+          <h4>Traffic Accident Severity<small>Data science</small></h4>
+          <p>Predicts accident severity from weather, time and road features in the US Accidents dataset, comparing a logistic regression baseline with a random forest across repeated splits.</p>
+          <span class="st">Python · pandas · scikit-learn · seaborn</span>
+          <span class="yr">2026</span><span class="ar">↗</span>
+        </a>
+        <a class="row" href="https://finflow-three-wheat.vercel.app" target="_blank" rel="noopener">
+          <span class="n">08</span>
+          <h4>FinTrack<small>Web app</small></h4>
+          <p>A finance and tasks dashboard with budgets, cash-flow charts, savings goals and an assistant that answers "buy now or wait?"</p>
+          <span class="st">Next.js · TypeScript · Tailwind</span>
+          <span class="yr">2026</span><span class="ar">↗</span>
+        </a>
+        <div class="row">
+          <span class="n">09</span>
+          <h4>Expense Tracker<small>Full-stack</small></h4>
+          <p>Expense tracking with categories, charts and secure sign-in, built on a typed REST API.</p>
+          <span class="st">Next.js · Express · Prisma · PostgreSQL · Clerk</span>
+          <span class="yr">2026</span><span class="ar"></span>
+        </div>
+        <div class="row">
+          <span class="n">10</span>
+          <h4>Why It Broke<small>YouTube channel</small></h4>
+          <p>Short documentaries on engineering failures: what went wrong, the physics behind it and what engineers learned.</p>
+          <span class="st">Research · scripting · video</span>
+          <span class="yr">2026</span><span class="ar"></span>
+        </div>
+        <a class="row" href="#top">
+          <span class="n">11</span>
+          <h4>This website<small>Design &amp; development</small></h4>
+          <p>Custom-built, with a real-time truss model whose deflection follows simple beam theory.</p>
+          <span class="st">HTML · CSS · Canvas</span>
+          <span class="yr">2026</span><span class="ar">↑</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="mono">(02) About</span><h2>Background</h2></div>
+        <p>An international student from Nepal, working where data meets the built environment.</p>
+      </div>
+      <div class="about">
+        <div></div>
+        <div>
+          <p class="big rv">I like problems that have a real answer, whether it sits in a dataset, a structural diagram or <span class="serif">a few hundred lines</span> of code.</p>
+          <div class="cols rv">
+            <p>I'm studying Data Science &amp; Data Analytics at Arkansas State University, with civil engineering alongside it on the path to the FE and PE licenses. I made the Dean's List in Fall 2025 and Spring 2026.</p>
+            <p>Before university I organized client and financial records at a chartered accountants' office in Kathmandu. In Jonesboro I spent a year and a half on a Sodexo food service team. Both taught me accuracy, communication and how to stay calm when it's busy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><span class="mono">(03) Experience</span><h2>Education &amp; work</h2></div>
+        <p>Formal education, work history, and the courses I've completed alongside my degree.</p>
+      </div>
+      <div class="tables">
+        <div class="rv">
+          <h3>Education</h3>
+          <div class="item"><h4>B.S. Data Science &amp; Data Analytics</h4><span class="when">2027 (expected)</span>
+            <span class="org">Arkansas State University, Jonesboro, AR</span>
+            <span class="note">Also studying Civil Engineering toward the FE → PE path</span>
+            <span class="honor">Dean's List, Fall 2025 and Spring 2026</span></div>
+          <div class="item"><h4>High School (+2 in Science)</h4><span class="when">2022</span>
+            <span class="org">Trinity International College, Kathmandu</span><span class="note">GPA 3.32 / 4.0</span></div>
+          <div class="item"><h4>Secondary Education Examination</h4><span class="when">2020</span>
+            <span class="org">Nepal Mega School, Kathmandu</span><span class="note">GPA 3.70 / 4.0</span></div>
+        </div>
+        <div class="rv">
+          <h3>Work</h3>
+          <div class="item"><h4>Food Service Worker</h4><span class="when">May 2024 – Nov 2025</span>
+            <span class="org">Sodexo Food Services, Jonesboro, AR</span>
+            <span class="note">Team-based service, food preparation and customer support while keeping quality, cleanliness and organization standards.</span></div>
+          <div class="item"><h4>Data Organizer &amp; Front Desk Assistant</h4><span class="when">Mar – Nov 2023</span>
+            <span class="org">Chartered accountants' office, Kathmandu</span>
+            <span class="note">Managed client data and financial records, handled client inquiries and scheduling, and kept documents accurate.</span></div>
+        </div>
+      </div>
+
+      <div class="certs" style="margin-top: clamp(64px, 8vw, 104px)">
+        <div class="rv"><span class="mono">Certifications</span></div>
+        <div class="rv">
+          <div class="cert-group">
+            <h4>IBM &amp; Coursera <span>5</span></h4>
+            <div class="cert-list">
+              <a href="https://www.coursera.org/account/accomplishments/records/W0GYZ83MF8Q9" target="_blank" rel="noopener">What is Data Science? <span>IBM · Jun 2026 ↗</span></a>
+              <a href="https://www.coursera.org/account/accomplishments/records/88MYYITL0B8Y" target="_blank" rel="noopener">Tools for Data Science <span>IBM · Jun 2026 ↗</span></a>
+              <a href="https://www.coursera.org/account/accomplishments/records/AMYXNYL9IJZ3" target="_blank" rel="noopener">Data Science Methodology <span>IBM · Jun 2026 ↗</span></a>
+              <a href="https://www.credly.com/badges/16e2c72d-c35d-4a32-acbf-1877a1182c86" target="_blank" rel="noopener">Tools for Data Science V2 <span>Credly · Jun 2026 ↗</span></a>
+              <a href="https://www.credly.com/badges/5fde5d52-aeee-4ffb-aed3-1dd2a396d315" target="_blank" rel="noopener">Data Science Orientation <span>Credly · Jun 2026 ↗</span></a>
+            </div>
+          </div>
+          <div class="cert-group">
+            <h4>Anthropic <span>1</span></h4>
+            <div class="cert-list">
+              <a href="https://verify.skilljar.com/c/66u76zcaan75" target="_blank" rel="noopener">Claude 101 <span>Jun 2026 ↗</span></a>
+            </div>
+          </div>
+          <div class="cert-group">
+            <h4>DataCamp <span>10</span></h4>
+            <div class="cert-list two">
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/e6578b92a41b06e548c5eaecb124e3d13bee8aa1" target="_blank" rel="noopener">Introduction to Python <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/e873c8d62cfa31972aa71fb98c37832b4ad17e51" target="_blank" rel="noopener">Intermediate Python <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/8eeded54fbb0aee45ac93c5ba7dd245f2530c36c" target="_blank" rel="noopener">Introduction to NumPy <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/691335cbc9f4ba9c4e3dcf8307eb16e3eccf3ba3" target="_blank" rel="noopener">Reshaping Data with pandas <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/c77ad58297b2839f76699ad1e2da86e8059c7c7f" target="_blank" rel="noopener">Exploratory Data Analysis in Python <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/5d07356b6fa07e6389a8748129cad2e45dd16048" target="_blank" rel="noopener">Data Visualization with Matplotlib <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/bb125119bf468f424a2dc2deb5f1b1502c8dc235" target="_blank" rel="noopener">Introduction to SQL <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/e695d042bcc47960f8706ec227b26fcef3dc6f23" target="_blank" rel="noopener">Intermediate SQL <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/edee8ee68801d3876f4d7541083f682120d82295" target="_blank" rel="noopener">Data Visualization in Power BI <span>↗</span></a>
+              <a href="https://www.datacamp.com/statement-of-accomplishment/course/2789d213779f3c1c1d27d5be5e622e1d11232fae" target="_blank" rel="noopener">Data Warehousing Concepts <span>↗</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cap" style="margin-top: clamp(64px, 8vw, 104px)">
+        <div class="rv">
+          <span class="mono">Capabilities</span>
+          <div id="sphere" aria-hidden="true"></div>
+          <span class="mono sphere-hint">Drag to spin</span>
+        </div>
+        <div class="skills rv">
+          <div><h4>Data</h4><ul><li>Python, pandas, NumPy</li><li>scikit-learn</li><li>Matplotlib, seaborn</li><li>SQL</li><li>Power BI, Excel</li></ul></div>
+          <div><h4>Software</h4><ul><li>TypeScript, React</li><li>Next.js</li><li>FastAPI</li><li>PostgreSQL, Prisma</li><li>Git, Vercel</li></ul></div>
+          <div><h4>Engineering</h4><ul><li>Statics</li><li>FE exam preparation</li><li>Failure case studies</li><li>Engineering calculators</li></ul></div>
+          <div><h4>Languages</h4><ul><li>English, fluent</li><li>Nepali, native</li><li>Hindi, conversational</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="mono rv">(04) Contact</span>
+      <h2 class="rv">Let's work<br /><span class="serif">together.</span></h2>
+      <a class="mail rv" href="mailto:bibekbhattarai9811@gmail.com">bibekbhattarai9811@gmail.com</a>
+      <div class="actions rv">
+        <a class="btn solid" href="Bibek-Bhattarai-CV.pdf" download>Download CV</a>
+        <a class="btn" href="https://www.linkedin.com/in/bibek-bhattarai-0845b5332/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/bibekbhattarai9811-create" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="yr">2026</span> Bibek Bhattarai</span>
+    <span id="clock">Jonesboro, AR</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script type="module">
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // nav hairline once scrolled
+  const nav = document.querySelector("header.nav");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // local time in Jonesboro
+  const clock = document.getElementById("clock");
+  const tick = () => {
+    const t = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/Chicago", timeZoneName: "short" }).format(new Date());
+    clock.textContent = "Jonesboro, AR · " + t;
+  };
+  tick(); setInterval(tick, 30000);
+
+  // reveal on scroll
+  const pending = new Set(document.querySelectorAll(".rv"));
+  const reveal = () => {
+    for (const el of pending) if (el.getBoundingClientRect().top < innerHeight * 0.92) { el.classList.add("in"); pending.delete(el); }
+  };
+  addEventListener("scroll", reveal, { passive: true }); addEventListener("resize", reveal); reveal();
+
+  /* ---------- capabilities sphere ---------- */
+  {
+    const words = ["Python", "pandas", "NumPy", "scikit-learn", "SQL", "Power BI", "Excel", "Matplotlib", "seaborn",
+      "Machine Learning", "Data Visualization", "EDA", "TypeScript", "React", "Next.js", "FastAPI", "PostgreSQL",
+      "Prisma", "Git", "Vercel", "Jupyter", "Statics", "FE Exam Prep", "Structures", "Claude", "Data Warehousing"];
+    const sphere = document.getElementById("sphere");
+    const items = words.map((w, i) => {
+      const el = document.createElement("span");
+      el.textContent = w;
+      sphere.appendChild(el);
+      const phi = Math.acos(1 - (2 * (i + 0.5)) / words.length), theta = Math.PI * (1 + Math.sqrt(5)) * i;
+      return { el, x: Math.sin(phi) * Math.cos(theta), y: Math.sin(phi) * Math.sin(theta), z: Math.cos(phi) };
+    });
+    let rx = 0.002, ry = 0.004, held = false, px = 0, py = 0, onScreen = true;
+    sphere.addEventListener("pointerdown", (e) => { held = true; px = e.clientX; py = e.clientY; sphere.setPointerCapture(e.pointerId); });
+    sphere.addEventListener("pointerup", () => (held = false));
+    sphere.addEventListener("pointermove", (e) => {
+      if (!held) return;
+      ry = (e.clientX - px) * 0.005; rx = -(e.clientY - py) * 0.005;
+      px = e.clientX; py = e.clientY;
+    });
+    new IntersectionObserver(([e]) => (onScreen = e.isIntersecting)).observe(sphere);
+    const spin = () => {
+      if (onScreen) {
+        const R = Math.min(sphere.clientWidth, sphere.clientHeight) * 0.42;
+        const cx = Math.cos(rx), sx = Math.sin(rx), cy = Math.cos(ry), sy = Math.sin(ry);
+        for (const it of items) {
+          const y1 = it.y * cx - it.z * sx, z1 = it.y * sx + it.z * cx;
+          const x2 = it.x * cy + z1 * sy, z2 = -it.x * sy + z1 * cy;
+          it.x = x2; it.y = y1; it.z = z2;
+          const k = (z2 + 2) / 3;
+          it.el.style.transform = `translate(-50%, -50%) translate3d(${(x2 * R).toFixed(1)}px, ${(y1 * R).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
+          it.el.style.opacity = (0.18 + (z2 + 1) * 0.41).toFixed(2);
+          it.el.style.zIndex = Math.round(z2 * 100) + 100;
+          it.el.classList.toggle("front", z2 > 0.82);
+        }
+        if (!held) { rx += (0.002 - rx) * 0.03; ry += (0.004 - ry) * 0.03; }
+      }
+      if (!reduce || held) requestAnimationFrame(spin);
+    };
+    spin();
+    if (reduce) sphere.addEventListener("pointermove", () => held && requestAnimationFrame(spin));
+  }
+
+  /* ---------- Fig. 01: Warren truss with a moving point load (plain canvas, no 3D library) ---------- */
+  {
+    const canvas = document.getElementById("truss");
+    const fig = canvas.parentElement;
+    const ctx = canvas.getContext("2d");
+    const INK = "18,18,18", ACCENT = "#d4471b";
+
+    const L = 12, panels = 8, H = 1.5, W = 1.1;     // span, panels, depth, half-width (metres)
+    const nodes = [];                                // undeformed [x, y, z]
+    const node = (x, y, z) => (nodes.push([x, y, z]), nodes.length - 1);
+    const bot = [[], []], top = [[], []];
+    for (const s of [0, 1]) {
+      const z = s ? W : -W;
+      for (let i = 0; i <= panels; i++) bot[s].push(node(-L / 2 + (i / panels) * L, 0, z));
+      for (let i = 0; i < panels; i++) top[s].push(node(-L / 2 + ((i + 0.5) / panels) * L, H, z));
+    }
+    const members = [];
+    for (const s of [0, 1]) {
+      for (let i = 0; i < panels; i++) {
+        members.push([bot[s][i], bot[s][i + 1]], [bot[s][i], top[s][i]], [top[s][i], bot[s][i + 1]]);
+        if (i < panels - 1) members.push([top[s][i], top[s][i + 1]]);
+      }
+    }
+    for (let i = 0; i <= panels; i++) members.push([bot[0][i], bot[1][i]]);
+    for (let i = 0; i < panels; i++) members.push([top[0][i], top[1][i]], [bot[0][i], bot[1][i + 1]]);
+
+    // Simply supported beam, point load P at a: δ(x) = P·b·x·(L² − b² − x²) / (6EIL) for x ≤ a (mirrored for x > a)
+    const P = 10e3, EI = 2.1e8, SCALE = 1500;       // N, N·m², visual exaggeration
+    const defl = (x, a) => {
+      const xs = x + L / 2, as = a + L / 2;
+      const u = xs <= as ? xs : L - xs, c = xs <= as ? L - as : as;
+      return (P * c * u * (L * L - c * c - u * u)) / (6 * EI * L);
+    };
+
+    // projection: rotate about Y then X, simple perspective camera on +z
+    let w = 0, h = 0, f = 1, camZ = 21, rotY = -0.55, rotX = 0.22;
+    const pr = new Float32Array(nodes.length * 2), tmp = [0, 0];
+    const project = (x, y, z, out) => {
+      const cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
+      const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+      const y2 = (y - 0.1) * cx - z1 * sx, z2 = (y - 0.1) * sx + z1 * cx;
+      const k = f / (camZ - z2);
+      out[0] = w / 2 + x1 * k; out[1] = h / 2 - (y2 - 0.3) * k;
+      return out;
+    };
+
+    function resize() {
+      const r = fig.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      camZ = w < 520 ? 30 : 21;
+      f = (h / 2) / Math.tan((28 * Math.PI) / 360);   // matches a 28° vertical field of view
+    }
+    new ResizeObserver(resize).observe(fig);
+    resize();
+
+    const readout = document.getElementById("readout");
+    let a = -L / 2 + 0.4, dir = 1, held = false, lx = 0, ly = 0, vY = 0, idle = 0, lastText = "";
+
+    function draw(dt) {
+      if (!reduce) {
+        a += dir * dt * 1.6;
+        if (a > L / 2 - 0.4) { a = L / 2 - 0.4; dir = -1; }
+        if (a < -L / 2 + 0.4) { a = -L / 2 + 0.4; dir = 1; }
+      } else a = 0;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = "round";
+
+      // ghost (undeformed) in dashes
+      ctx.setLineDash([3, 3]); ctx.lineWidth = 1; ctx.strokeStyle = `rgba(${INK},.2)`;
+      ctx.beginPath();
+      for (const [i, j] of members) {
+        project(...nodes[i], tmp); ctx.moveTo(tmp[0], tmp[1]);
+        project(...nodes[j], tmp); ctx.lineTo(tmp[0], tmp[1]);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+
+      // deformed truss
+      let maxD = 0;
+      for (let n = 0; n < nodes.length; n++) {
+        const [x, y, z] = nodes[n], d = defl(x, a);
+        if (d > maxD) maxD = d;
+        project(x, y - d * SCALE, z, tmp); pr[n * 2] = tmp[0]; pr[n * 2 + 1] = tmp[1];
+      }
+      ctx.lineWidth = 1.15; ctx.strokeStyle = `rgba(${INK},.88)`;
+      ctx.beginPath();
+      for (const [i, j] of members) { ctx.moveTo(pr[i * 2], pr[i * 2 + 1]); ctx.lineTo(pr[j * 2], pr[j * 2 + 1]); }
+      ctx.stroke();
+      ctx.fillStyle = `rgb(${INK})`;
+      for (let n = 0; n < nodes.length; n++) ctx.fillRect(pr[n * 2] - 1.6, pr[n * 2 + 1] - 1.6, 3.2, 3.2);
+
+      // supports
+      ctx.lineWidth = 1; ctx.beginPath();
+      for (const x of [-L / 2, L / 2]) for (const z of [-W, W]) {
+        const p0 = project(x, 0, z, [0, 0]), p1 = project(x - 0.3, -0.45, z, [0, 0]), p2 = project(x + 0.3, -0.45, z, [0, 0]);
+        ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.closePath();
+      }
+      ctx.stroke();
+
+      // deflected-shape diagram below the truss
+      ctx.strokeStyle = `rgba(${INK},.25)`; ctx.beginPath();
+      project(-L / 2, -0.9, 0, tmp); ctx.moveTo(tmp[0], tmp[1]); project(L / 2, -0.9, 0, tmp); ctx.lineTo(tmp[0], tmp[1]); ctx.stroke();
+      ctx.strokeStyle = ACCENT; ctx.globalAlpha = 0.6; ctx.beginPath();
+      for (let k = 0; k <= 60; k++) {
+        const x = -L / 2 + (k / 60) * L;
+        project(x, -0.9 - defl(x, a) * SCALE, 0, tmp);
+        k ? ctx.lineTo(tmp[0], tmp[1]) : ctx.moveTo(tmp[0], tmp[1]);
+      }
+      ctx.stroke(); ctx.globalAlpha = 1;
+
+      // the load arrow
+      const ya = -defl(a, a) * SCALE;
+      const tip = project(a, ya + 0.15, 0, [0, 0]), tail = project(a, ya + 1.4, 0, [0, 0]);
+      const hl = project(a - 0.14, ya + 0.42, 0, [0, 0]), hr = project(a + 0.14, ya + 0.42, 0, [0, 0]);
+      ctx.strokeStyle = ACCENT; ctx.lineWidth = 1.4; ctx.beginPath();
+      ctx.moveTo(tail[0], tail[1]); ctx.lineTo(tip[0], tip[1]);
+      ctx.moveTo(hl[0], hl[1]); ctx.lineTo(tip[0], tip[1]); ctx.lineTo(hr[0], hr[1]);
+      ctx.stroke();
+      ctx.fillStyle = ACCENT; ctx.beginPath(); ctx.arc(tip[0], tip[1] + 3, 3, 0, Math.PI * 2); ctx.fill();
+
+      const text = `P = 10 kN · x = ${(a + L / 2).toFixed(1)} m<br>δ<sub>max</sub> = ${(maxD * 1000).toFixed(2)} mm`;
+      if (text !== lastText) { readout.innerHTML = text; lastText = text; }
+    }
+
+    canvas.addEventListener("pointerdown", (e) => { held = true; lx = e.clientX; ly = e.clientY; canvas.setPointerCapture(e.pointerId); });
+    canvas.addEventListener("pointerup", () => (held = false));
+    canvas.addEventListener("pointermove", (e) => {
+      if (!held) return;
+      vY = (e.clientX - lx) * 0.006; rotY += vY;
+      rotX = Math.max(-0.2, Math.min(0.7, rotX + (e.clientY - ly) * 0.004));
+      lx = e.clientX; ly = e.clientY; idle = 0;
+    });
+
+    let visible = true, last = performance.now();
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(fig);
+    function frame(now) {
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      if (visible && !document.hidden) {
+        idle += dt;
+        if (!held) { vY *= 0.92; rotY += vY; if (!reduce && idle > 2) rotY += dt * 0.06; }
+        draw(dt);
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+</script>
+</body>
+</html>
