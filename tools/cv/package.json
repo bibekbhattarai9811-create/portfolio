@@ -1,6 +1,6 @@
 {
   "name": "bibek-cv",
   "private": true,
-  "scripts": { "build": "node make_cv.js ../Bibek-Bhattarai-CV.docx" },
+  "scripts": { "build": "node make_cv.js ../../Bibek-Bhattarai-CV.docx" },
   "dependencies": { "docx": "^9.10.0" }
 }

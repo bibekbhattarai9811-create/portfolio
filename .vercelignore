@@ -1,5 +1,5 @@
 *.docx
+*.pdf
 .env*
-cv/
 README.md
 tools/

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Request CV — Bibek Bhattarai</title>
+<meta name="description" content="Request Bibek Bhattarai's CV. Requests are reviewed personally and approved with a private download link." />
+<meta name="color-scheme" content="light" />
+<script>document.documentElement.classList.add("js")</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M6 22h20M8 22l4-10 4 10 4-10 4 10M10 17h12' stroke='%23f4f2ec' stroke-width='1.8' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="/assets/site.css" />
+<style>
+  .req { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 88px); padding: clamp(40px, 7vw, 96px) 0 clamp(80px, 10vw, 140px); }
+  .req h1 { font-family: var(--display); font-weight: 500; font-size: clamp(44px, 6.4vw, 88px); line-height: .96; letter-spacing: -.04em; margin: 18px 0 24px; }
+  .req .lede { font-size: 18px; color: var(--ink-2); max-width: 460px; }
+  .req ol { list-style: none; margin-top: 36px; border-top: 1px solid var(--ink); }
+  .req ol li { display: grid; grid-template-columns: 40px 1fr; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--ink-2); }
+  .req ol li span { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
+  form.cvform { border-top: 1px solid var(--ink); padding-top: 8px; }
+  .field { display: block; padding: 18px 0 14px; border-bottom: 1px solid var(--line); }
+  .field span { display: block; font-family: var(--mono); font-size: 12px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field textarea { width: 100%; border: 0; background: transparent; font: inherit; font-size: 18px; color: var(--ink); outline: none; resize: vertical; }
+  .field textarea { min-height: 96px; font-size: 16px; line-height: 1.5; }
+  .field:focus-within { border-bottom-color: var(--ink); }
+  .field:focus-within span { color: var(--accent); }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .cvform .actions { display: flex; align-items: center; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+  .cvform button { font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; height: 46px; padding: 0 24px; }
+  .cvform button[disabled] { opacity: .5; cursor: wait; }
+  .msg { font-size: 15px; }
+  .msg.err { color: var(--accent); }
+  .done { border-top: 1px solid var(--ink); padding-top: 24px; }
+  .done h2 { font-family: var(--display); font-weight: 500; font-size: 34px; letter-spacing: -.02em; margin-bottom: 10px; }
+  .done p { color: var(--ink-2); }
+  @media (max-width: 960px) { .req { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="/" class="brand"><i></i>Bibek Bhattarai</a>
+    <nav>
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="req">
+    <div>
+      <a class="back mono" href="/">← Home</a>
+      <h1>Request my <span class="serif">CV.</span></h1>
+      <p class="lede">I share my CV personally. Tell me who you are and I'll send you a private download link, usually within a day.</p>
+      <ol>
+        <li><span>01</span>You send a short request.</li>
+        <li><span>02</span>I review it and approve.</li>
+        <li><span>03</span>You get a download link that works for 7 days.</li>
+      </ol>
+    </div>
+
+    <div>
+      <form class="cvform" id="cvform" novalidate>
+        <label class="field"><span>Your name *</span><input name="name" autocomplete="name" required maxlength="80" /></label>
+        <label class="field"><span>Email *</span><input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
+        <label class="field"><span>Company or organization</span><input name="org" autocomplete="organization" maxlength="120" /></label>
+        <label class="field"><span>What's it for?</span><textarea name="reason" maxlength="800" placeholder="e.g. Summer 2027 data analyst internship"></textarea></label>
+        <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off" /></label>
+        <div class="actions">
+          <button class="btn solid" type="submit">Send request</button>
+          <span class="msg" id="msg" role="status"></span>
+        </div>
+      </form>
+      <div class="done" id="done" hidden>
+        <span class="mono">Request sent</span>
+        <h2>Thanks, I'll be in touch.</h2>
+        <p>I'll review your request and email a download link to <b id="done-email"></b>. If it's urgent, write to <a href="mailto:bibekbhattarai9811@gmail.com" style="border-bottom:1px solid">bibekbhattarai9811@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="yr">2026</span> Bibek Bhattarai</span>
+    <span id="clock">Jonesboro, AR</span>
+    <a href="/">Home ↑</a>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script>
+  const form = document.getElementById("cvform"), msg = document.getElementById("msg");
+  const started = Date.now();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form));
+    if (data.name.trim().length < 2 || !/^\S+@\S+\.\S+$/.test(data.email.trim())) {
+      msg.className = "msg err"; msg.textContent = "Please add your name and a valid email."; return;
+    }
+    const btn = form.querySelector("button"); btn.disabled = true;
+    msg.className = "msg"; msg.textContent = "Sending…";
+    try {
+      const r = await fetch("/api/cv-request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...data, started }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || "Something went wrong. Please try again.");
+      document.getElementById("done-email").textContent = data.email.trim();
+      form.hidden = true; document.getElementById("done").hidden = false;
+    } catch (err) {
+      msg.className = "msg err"; msg.textContent = err.message; btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

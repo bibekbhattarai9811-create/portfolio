@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Office — Bibek Bhattarai</title>
+<meta name="description" content="A small office of AI agents that works on a side business every day, while every outbound action still needs my approval." />
+<meta name="color-scheme" content="light" />
+<script>document.documentElement.classList.add("js")</script>
+<meta property="og:title" content="AI Office — case study by Bibek Bhattarai" />
+<meta property="og:description" content="A small office of AI agents that works on a side business every day, while every outbound action still needs my approval." />
+<meta property="og:image" content="https://bibek-bhattarai.vercel.app/img/learncivilwithme.jpg" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Cpath d='M6 22h20M8 22l4-10 4 10 4-10 4 10M10 17h12' stroke='%23f4f2ec' stroke-width='1.8' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="/" class="brand"><i></i>Bibek Bhattarai</a>
+    <nav>
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#contact">Contact</a>
+      <a class="btn" href="/cv/">Request CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="wrap">
+    <div class="case-hero">
+      <a class="back mono" href="/#work">← All work</a>
+      <span class="mono kicker">Case study 03 · AI agents · 2026</span>
+      <h1>AI Office</h1>
+      <p class="lede">A small office of AI agents that works on a side business every day, while every outbound action still needs my approval.</p>
+      <div class="meta">
+        <div><span class="mono">Role</span><p>Product design and development</p></div>
+        <div><span class="mono">Timeline</span><p>October 2026, ongoing</p></div>
+        <div><span class="mono">Stack</span><p>Next.js, TypeScript, Three.js, Claude, Gemini, Groq, NVIDIA</p></div>
+        <div><span class="mono">Links</span><p>Private, runs locally</p></div>
+      </div>
+      <div class="case-cover">
+        <div class="shot"><div class="bar"><i></i><i></i><i></i><span>ai office · 3d view</span></div>
+          <img src="/img/aioffice.webp" srcset="/img/aioffice-720.webp 720w, /img/aioffice.webp 1200w" sizes="(max-width: 1240px) 100vw, 1200px"
+            width="1200" height="750" alt="Cartoon 3D office where six AI agents work at their desks" fetchpriority="high" decoding="async" /></div>
+      </div>
+    </div>
+
+      <section class="cs">
+        <header class="rv"><span class="mono">Overview</span><h2>The idea</h2></header>
+        <div class="cs-body rv"><p>I wanted help building a side income without doing every step myself: researching niches, drafting outreach, writing posts and keeping track of what happened yesterday.</p><p>AI Office treats that as a team. Six agents with distinct roles work through a daily cycle, and a hard rule keeps me in charge: <strong>agents prepare, I send.</strong></p></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Approach</span><h2>How a day works</h2></header>
+        <div class="cs-body rv"><ol class="steps"><li><div><h3>The CEO plans</h3><p>Ada, the CEO agent, reads the mission, the last three reports and my approve/reject decisions, then assigns three to six tasks.</p></div></li><li><div><h3>The team works in order</h3><p>Rex researches with live web search and cites sources, Nia analyses, Mia writes marketing, Bo writes specs and Otto handles operations. Each agent can see what earlier teammates produced.</p></div></li><li><div><h3>Nothing leaves without me</h3><p>Posts, emails, DMs, sign-ups and any spending land in an Approvals tab. Nothing is ever sent automatically.</p></div></li><li><div><h3>A report that feeds tomorrow</h3><p>The CEO writes a daily report ending in a NEXT GOAL, which becomes the starting point of the next cycle.</p></div></li></ol></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Decisions</span><h2>Key decisions</h2></header>
+        <div class="cs-body rv"><div class="decisions"><div><h3>Every agent has a fallback chain</h3><p>Each agent tries its preferred model first and falls through Claude, Gemini, Groq and NVIDIA. Free models get retired often, so every runner walks a list of models instead of hard-coding one.</p></div><div><h3>Runs itself every morning</h3><p>A scheduled task runs the cycle at 8 AM, catches up when the PC wakes or I log in, runs at most once per day, and gives every step a deadline so one hung web search can't block the day.</p></div><div><h3>Human approval as a feature</h3><p>The approval queue isn't a limitation, it's the product. It makes it safe to let agents draft real outreach.</p></div><div><h3>Make the work visible</h3><p>A cartoon 3D office shows the agents at their desks, walking to the CEO when a task is done and sending documents to my inbox when something needs approval.</p></div></div></div>
+      </section>
+      <section class="cs">
+        <header class="rv"><span class="mono">Results</span><h2>Where it stands</h2></header>
+        <div class="cs-body rv"><div class="stats"><div><strong>6</strong><span>agents with distinct roles</span></div><div><strong>4</strong><span>AI providers with fallback</span></div><div><strong>1</strong><span>cycle per day, scheduled</span></div></div><p>The office runs every morning on my PC and is researching a first business idea with me.</p></div>
+      </section>
+
+    <div class="gallery">
+        <figure class="rv wide">
+          <div class="shot"><div class="bar"><i></i><i></i><i></i><span>ai office · dashboard</span></div>
+            <img src="/img/case/aioffice-dashboard.webp" srcset="/img/case/aioffice-dashboard-720.webp 720w, /img/case/aioffice-dashboard.webp 1200w" sizes="(max-width: 960px) 100vw, 1200px"
+              width="1200" height="750" alt="AI Office dashboard with agent status cards and the approvals tab" loading="lazy" decoding="async" /></div>
+          <figcaption class="mono">The dashboard: what each agent is doing, the goal for the cycle and the approvals waiting for me.</figcaption>
+        </figure>
+    </div>
+
+    <a class="next" href="/work/tbn-store/">
+      <span class="mono">Next project</span>
+      <strong>TBN Store <span>→</span></strong>
+    </a>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="yr">2026</span> Bibek Bhattarai</span>
+    <span id="clock">Jonesboro, AR</span>
+    <a href="/">Home ↑</a>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

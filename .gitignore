@@ -2,3 +2,5 @@
 .env*
 *.docx
 node_modules/
+# the plain CV never goes in git, only private/cv.pdf.enc
+Bibek-Bhattarai-CV.pdf

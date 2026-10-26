@@ -145,8 +145,12 @@ const children = [
   bullet("Automated a YouTube workflow from idea to AI-written script, voice-over with word-synced captions and an auto-edited MP4, replacing hours of manual editing."),
   entry("PyQuest: Learn Python in the Browser", "Pyodide, Next.js"),
   bullet("Created 83 bite-sized Python lessons that run real Python in the browser with automatic answer checking."),
+  entry("AI Office: Multi-Agent Business Assistant", "Next.js, TypeScript, Claude, Gemini, Groq, NVIDIA"),
+  bullet("Built a team of six AI agents (CEO, researcher, analyst, marketer, builder, ops) that runs a scheduled daily cycle with live web research, model fallback across four providers and a human approval queue for every outbound action."),
+  entry("JoRide: Community Ride App", "Next.js, TypeScript, SQLite, PWA"),
+  bullet("Designed a phone-first, installable app for free rides in Jonesboro with passenger and driver modes, race-free ride acceptance, chat, a live ride tracker and safe-arrival check-ins."),
   entry("Also built", null),
-  bullet("FinTrack (finance and tasks dashboard, Next.js), Expense Tracker (Next.js, Express, Prisma, Clerk) and a personal portfolio site with a real-time 3D truss model (JavaScript, Canvas)."),
+  bullet("JARVIS (voice assistant for phone and PC with wake word and live web search), FinTrack (finance and tasks dashboard), Expense Tracker (Next.js, Express, Prisma, Clerk) and this portfolio site with a real-time truss model (JavaScript, Canvas)."),
   entry("Why It Broke", "YouTube channel, creator"),
   bullet("Research, script and produce videos explaining engineering failures, starting with the Tacoma Narrows Bridge collapse."),
 

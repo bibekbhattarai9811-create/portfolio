@@ -3,6 +3,7 @@
 Edit the CASES list below, then run:  python tools/build_cases.py
 The pages are plain static HTML that share /assets/site.css and /assets/site.js.
 """
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -113,6 +114,39 @@ CASES = [
         ],
     },
     {
+        "slug": "ai-office",
+        "title": "AI Office",
+        "kicker": "Case study 00 · AI agents · 2026",
+        "lede": "A small office of AI agents that works on a side business every day, while every outbound action still needs my approval.",
+        "role": "Product design and development",
+        "timeline": "October 2026, ongoing",
+        "stack": "Next.js, TypeScript, Three.js, Claude, Gemini, Groq, NVIDIA",
+        "links": [],
+        "cover": ("aioffice", "Cartoon 3D office where six AI agents work at their desks", "ai office · 3d view"),
+        "sections": [
+            ("Overview", "The idea", paras(
+                "I wanted help building a side income without doing every step myself: researching niches, drafting outreach, writing posts and keeping track of what happened yesterday.",
+                "AI Office treats that as a team. Six agents with distinct roles work through a daily cycle, and a hard rule keeps me in charge: <strong>agents prepare, I send.</strong>")),
+            ("Approach", "How a day works", steps([
+                ("The CEO plans", "Ada, the CEO agent, reads the mission, the last three reports and my approve/reject decisions, then assigns three to six tasks."),
+                ("The team works in order", "Rex researches with live web search and cites sources, Nia analyses, Mia writes marketing, Bo writes specs and Otto handles operations. Each agent can see what earlier teammates produced."),
+                ("Nothing leaves without me", "Posts, emails, DMs, sign-ups and any spending land in an Approvals tab. Nothing is ever sent automatically."),
+                ("A report that feeds tomorrow", "The CEO writes a daily report ending in a NEXT GOAL, which becomes the starting point of the next cycle."),
+            ])),
+            ("Decisions", "Key decisions", decisions([
+                ("Every agent has a fallback chain", "Each agent tries its preferred model first and falls through Claude, Gemini, Groq and NVIDIA. Free models get retired often, so every runner walks a list of models instead of hard-coding one."),
+                ("Runs itself every morning", "A scheduled task runs the cycle at 8 AM, catches up when the PC wakes or I log in, runs at most once per day, and gives every step a deadline so one hung web search can't block the day."),
+                ("Human approval as a feature", "The approval queue isn't a limitation, it's the product. It makes it safe to let agents draft real outreach."),
+                ("Make the work visible", "A cartoon 3D office shows the agents at their desks, walking to the CEO when a task is done and sending documents to my inbox when something needs approval."),
+            ])),
+            ("Results", "Where it stands", stats([("6", "agents with distinct roles"), ("4", "AI providers with fallback"), ("1", "cycle per day, scheduled")]) + paras(
+                "The office runs every morning on my PC and is researching a first business idea with me.")),
+        ],
+        "gallery": [
+            ("case/aioffice-dashboard", "AI Office dashboard with agent status cards and the approvals tab", "ai office · dashboard", "The dashboard: what each agent is doing, the goal for the cycle and the approvals waiting for me.", "wide"),
+        ],
+    },
+    {
         "slug": "tbn-store",
         "title": "TBN Store",
         "kicker": "Case study 03 · E-commerce · 2026",
@@ -144,6 +178,39 @@ CASES = [
         ],
         "gallery": [
             ("case/tbn-products", "Product grid with sweaters and prices in rupees", "tbnstore.vercel.app/products", "The full catalog with search, sorting and rupee pricing.", "wide"),
+        ],
+    },
+    {
+        "slug": "joride",
+        "title": "JoRide",
+        "kicker": "Case study 00 · Mobile web app · 2026",
+        "lede": "Free rides between neighbours in Jonesboro: ask for a lift, and whoever is free gives it.",
+        "role": "Product design and full-stack development",
+        "timeline": "October 2026, prototype",
+        "stack": "Next.js, TypeScript, SQLite, installable web app (PWA)",
+        "links": [],
+        "cover": ("joride", "JoRide passenger and driver screens on three phones", "joride · passenger and driver"),
+        "sections": [
+            ("Overview", "The problem", paras(
+                "Getting around Jonesboro without a car is hard. Public transport is limited, and a quick trip to Walmart or Kroger can take a lot of planning.",
+                "Plenty of people with cars have free time. JoRide connects the two with the simplest possible loop: <strong>request a ride, and whoever is free takes it.</strong> No prices, no fares, just neighbours helping out.")),
+            ("Approach", "How it works", steps([
+                ("Request", "A rider picks a destination (with quick picks like Walmart and Kroger), a pickup point and either Now or a scheduled time."),
+                ("Accept", "Any driver who is online sees the request and taps \"I can take you\". Only one driver can win, because accepting is a single conditional database update."),
+                ("Ride", "Rider and driver get chat, quick replies and each other's phone number, plus a tracker that moves from requested to driver found, picked up and arrived."),
+                ("Finish safely", "The rider confirms \"I arrived safely\" and rates the driver. If a driver can't make it, the request goes straight back to open, and either side can report a problem."),
+            ])),
+            ("Decisions", "Key decisions", decisions([
+                ("Two modes, one account", "Sign-in asks whether you're riding or driving. Passenger mode is a light green app, and driver mode is a dark, amber interface with an online switch and a live request feed."),
+                ("Phone-first everywhere", "Key actions are pinned to the bottom of the screen within thumb reach, and the app can be installed to the home screen like a native app."),
+                ("Kept deliberately free", "Earlier ideas such as splitting gas costs, a student-only gate and drivers posting seat offers were dropped to keep the loop as simple as asking a friend."),
+                ("Simple, local data", "SQLite stores users, sessions, rides, messages, ratings and reports, which is fast to build on before moving to a hosted database."),
+            ])),
+            ("Next", "What's next", paras(
+                "Put it online with a hosted database, add phone or email verification for safety, and notify riders the moment a driver accepts.")),
+        ],
+        "gallery": [
+            ("case/joride-flow", "JoRide sign-in, ride request form and driver ride screen", "joride · sign-in, request, driver view", "Sign-in with a Passenger or Driver switch, the request form, and the driver's view of an accepted ride.", "wide"),
         ],
     },
     {
@@ -255,8 +322,7 @@ def page(c, nxt):
       <a href="/#about">About</a>
       <a href="/#experience">Experience</a>
       <a href="/#contact">Contact</a>
-      <a class="btn" href="/Bibek-Bhattarai-CV.pdf" download>CV
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v9m0 0 3.5-3.5M8 11 4.5 7.5M3 14h10"/></svg></a>
+      <a class="btn" href="/cv/">Request CV</a>
     </nav>
   </div>
 </header>
@@ -307,6 +373,7 @@ def page(c, nxt):
 
 
 for i, c in enumerate(CASES):
+    c["kicker"] = re.sub(r"Case study \d\d", f"Case study {i + 1:02d}", c["kicker"])
     out = ROOT / "work" / c["slug"] / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(page(c, CASES[(i + 1) % len(CASES)]), encoding="utf-8")
