@@ -119,25 +119,67 @@ const SECTIONS = [
   { kw: ["top", "home", "start", "beginning"], to: "#top", name: "the top" },
 ];
 
-const norm = (s) => " " + s.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9.\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
-const has = (text, k) => text.includes(" " + k + " ") || (k.length > 4 && text.includes(k));
+// Speech engines often mishear names, especially with non-US accents. Map common mishearings back.
+const ALIASES = [
+  [/ (vivek|bebek|bibeck|bibbek|bibake|bebak|vibek|bibic|bibak|babek|bibhek|bivek|biwek|beebek|be back|bee back|be bec) /g, " bibek "],
+  [/ (bhattarai|battarai|bhatarai|bhattari|bhatt rai|bhatterai|bhattray|but a rye|bad a rye) /g, " bhattarai "],
+  [/ (joe ride|jo ride|go ride|joy ride|joel ride|show ride|joe right|jo right) /g, " joride "],
+  [/ (pie quest|pi quest|py quest|by quest|pike west|pie chest|pi chest) /g, " pyquest "],
+  [/ (equip guard|equipped guard|a quip guard|equip god|equipment guard|equip card|e quip guard|equip yard) /g, " equipguard "],
+  [/ (t b n|tv n|t v n|tbm|tvn|tdn|t b and) /g, " tbn "],
+  [/ (video forge|video for|video fours|video force|video forage) /g, " videoforge "],
+  [/ (learn civil with me|learn civil|learning civil|lean civil) /g, " learncivilwithme "],
+  [/ (jervis|travis|javis|jarvas|harvis|jarvees|jar vis) /g, " jarvis "],
+  [/ (c v|see v|c b|cvs|see vee|seevee|sea v|cv s) /g, " cv "],
+  [/ (resumé|rezoom|resumay|res you may) /g, " resume "],
+  [/ (a i|a eye|ay eye) /g, " ai "],
+  [/ (intern ship|in turn ship|internships) /g, " internship "],
+  [/ (data camp|data come) /g, " datacamp "],
+  [/ (arkansaw|arkansis|our kansas|ark ansas) /g, " arkansas "],
+  [/ (jones borough|jones burrow|jones bureau|jonesborough|jones bro|jones barrow) /g, " jonesboro "],
+  [/ (machine learn|machine learnings) /g, " machine learning "],
+];
+
+const norm = (s) => {
+  let t = " " + s.toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9.\s]/g, " ").replace(/\s+/g, " ").trim() + " ";
+  for (const [re, to] of ALIASES) t = t.replace(re, to);
+  return t;
+};
+
+// Edit distance, so a word that is one or two letters off still counts ("skils", "certifcate", "projeckt").
+function lev(a, b) {
+  if (Math.abs(a.length - b.length) > 2) return 9;
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+const has = (text, k) => {
+  if (text.includes(" " + k + " ") || (k.length > 4 && text.includes(k))) return true;
+  if (k.includes(" ") || k.length < 5) return false;
+  const tol = k.length >= 8 ? 2 : 1;
+  return text.trim().split(" ").some((w) => w.length >= 4 && lev(w, k) <= tol);
+};
 
 let lastProject = null;
 
-function think(raw) {
+// Returns an answer plus a confidence score; commit=false lets us compare several speech guesses safely.
+function think(raw, commit = true) {
   const t = norm(raw);
 
   // navigation commands: "go to / show / take me to / scroll to <section>"
   if (/ (go to|take me to|scroll to|jump to|navigate to|open the|show the) /.test(t) || /^ (go|scroll|jump) /.test(t)) {
     const sec = SECTIONS.find((s) => s.kw.some((k) => has(t, k)));
-    if (sec) return { say: `Taking you to ${sec.name}.`, scroll: sec.to };
+    if (sec) return { say: `Taking you to ${sec.name}.`, scroll: sec.to, score: 9 };
   }
 
   // follow-ups about the last project
   if (lastProject && /( open it | open that | show it | show me it | more | details | case study | tell me more | go there | yes )/.test(t)) {
     const p = PROJECTS.find((x) => x.name === lastProject);
-    if (p?.id) return { say: `Opening the ${p.name} case study.`, go: `/work/${p.id}/` };
-    if (p?.live) return { say: `Here's the link for ${p.name}.`, links: [[`Open ${p.name}`, p.live]] };
+    if (p?.id) return { say: `Opening the ${p.name} case study.`, go: `/work/${p.id}/`, score: 9 };
+    if (p?.live) return { say: `Here's the link for ${p.name}.`, links: [[`Open ${p.name}`, p.live]], score: 9 };
   }
 
   // a named project wins
@@ -147,11 +189,11 @@ function think(raw) {
     if (s > bestPS) { bestP = p; bestPS = s; }
   }
   if (bestP && bestPS >= 4 && !/ (cv|resume) /.test(t)) {
-    lastProject = bestP.name;
+    if (commit) lastProject = bestP.name;
     const links = [];
     if (bestP.id) links.push([`${bestP.name} case study`, `/work/${bestP.id}/`]);
     if (bestP.live) links.push([bestP.live.includes("github.com") ? "Source code" : "Live site", bestP.live]);
-    return { say: bestP.say + (bestP.id ? " Shall I open the case study?" : ""), links };
+    return { say: bestP.say + (bestP.id ? " Shall I open the case study?" : ""), links, score: 10 + bestPS };
   }
 
   // otherwise score intents
@@ -163,14 +205,19 @@ function think(raw) {
   }
   if (best && bestS >= 0.6) {
     const ctxP = best.ctx && PROJECTS.find((p) => p.id === best.ctx);
-    if (ctxP) lastProject = ctxP.name;
+    if (ctxP && commit) lastProject = ctxP.name;
     const links = best.links || (ctxP ? [[`${ctxP.name} case study`, `/work/${ctxP.id}/`]] : undefined);
-    return { say: best.say(), scroll: best.scroll, go: best.go, links };
+    return { say: best.say(), scroll: best.scroll, go: best.go, links, score: bestS };
   }
-  return {
-    say: "That one isn't in my files. Try asking about Bibek's projects, skills, education, or how to get in touch.",
-    chips: true,
-  };
+  return { say: "", score: 0, fallback: true, heard: raw };
+}
+
+// When nothing matched, offer the closest things instead of a dead end.
+function suggestions(raw) {
+  const words = norm(raw).trim().split(" ").filter((w) => w.length >= 4);
+  const near = PROJECTS.filter((p) => p.kw.some((k) => words.some((w) => !k.includes(" ") && k.length >= 5 && lev(w, k) <= 2)))
+    .slice(0, 2).map((p) => `Tell me about ${p.name}`);
+  return [...near, "Who is Bibek?", "Show me the projects", "How do I contact Bibek?"].slice(0, 4);
 }
 
 /* ------------------------------------------------------------------ voice out */
@@ -203,35 +250,151 @@ function speak(text, done) {
 
 /* ------------------------------------------------------------------ voice in */
 
+// Two engines:
+//  1. Whisper (server, /api/transcribe): far better with accents, and understands other languages too.
+//     Used when the site has a GROQ_API_KEY configured.
+//  2. The browser's own speech recognition, tuned to the visitor's English accent, keeping 5 guesses.
+
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-let rec = null, listening = false;
+const ACCENTS = [
+  ["auto", "Auto"], ["en-US", "US"], ["en-GB", "UK"], ["en-IN", "South Asia (Nepal, India)"], ["en-AU", "Australia"],
+  ["en-CA", "Canada"], ["en-IE", "Ireland"], ["en-NZ", "New Zealand"], ["en-ZA", "South Africa"], ["en-NG", "Nigeria"],
+  ["en-KE", "Kenya"], ["en-PH", "Philippines"], ["en-SG", "Singapore"],
+];
+let accent = "auto";
+try { accent = localStorage.getItem("jarvis-accent") || "auto"; } catch {}
+
+function autoLang() {
+  const langs = navigator.languages?.length ? navigator.languages : [navigator.language || "en-US"];
+  for (const l of langs) {
+    if (/^en-(US|GB|IN|AU|CA|IE|NZ|ZA|NG|KE|PH|SG)$/i.test(l)) return l;
+    if (/^(ne|hi|ur|bn|si|ta|te|mr|gu|pa|kn|ml)\b/i.test(l)) return "en-IN";
+  }
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  if (/Kathmandu|Kolkata|Calcutta|Dhaka|Karachi|Colombo|Thimphu/.test(tz)) return "en-IN";
+  return /^en/i.test(langs[0]) ? langs[0] : "en-US";
+}
+const recLang = () => (accent === "auto" ? autoLang() : accent);
+
+let whisper = false;
+const canRecord = !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+fetch("/api/transcribe", { method: "GET" }).then((r) => r.ok && r.json()).then((j) => {
+  whisper = !!j?.enabled && canRecord;
+  paintEngine();
+}).catch(() => {});
+
+let rec = null, listening = false, stopRecording = null, micLevel = 0;
+
 function listen() {
+  if (listening) { rec?.stop(); stopRecording?.(); return; }
+  speechSynthesis?.cancel();
+  if (whisper) return listenWhisper();
   if (!SR) {
-    reply({ say: "Voice input isn't supported in this browser, but you can type your question below." }, false);
+    reply({ say: canRecord ? "Voice input isn't available in this browser yet, but you can type your question below." : "Voice input isn't supported in this browser, but you can type your question below." }, false);
     $("ask-input").focus();
     return;
   }
-  if (listening) { rec.stop(); return; }
-  speechSynthesis?.cancel();
   rec = new SR();
-  rec.lang = "en-US"; rec.interimResults = true; rec.maxAlternatives = 1;
-  let finalText = "";
+  rec.lang = recLang(); rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
+  let finals = [];   // list of alternative transcripts for the utterance
+  let interim = "";
   rec.onstart = () => { listening = true; setState("listening"); $("you").textContent = "Listening…"; };
   rec.onresult = (e) => {
-    const r = Array.from(e.results).map((x) => x[0].transcript).join(" ");
-    finalText = r;
-    $("you").textContent = "› " + r;
+    interim = "";
+    finals = [];
+    for (let i = 0; i < e.results.length; i++) {
+      const res = e.results[i];
+      if (res.isFinal) finals.push(Array.from(res).map((a) => a.transcript.trim()));
+      else interim += res[0].transcript;
+    }
+    const shown = finals.map((alts) => alts[0]).join(" ") + (interim ? " " + interim : "");
+    $("you").textContent = "› " + shown.trim();
   };
   rec.onerror = (e) => {
     listening = false; setState("idle");
     if (e.error === "not-allowed" || e.error === "service-not-allowed")
       reply({ say: "I can't hear you without microphone access. You can type instead." }, false);
+    else if (e.error === "no-speech")
+      reply({ say: "I didn't catch anything. Tap the orb and try again, a little closer to the mic." }, false);
   };
   rec.onend = () => {
     listening = false;
-    if (finalText.trim()) ask(finalText); else { setState("idle"); if ($("you").textContent === "Listening…") $("you").textContent = ""; }
+    if (!finals.length && interim.trim()) finals = [[interim.trim()]];
+    if (!finals.length) { setState("idle"); if ($("you").textContent === "Listening…") $("you").textContent = ""; return; }
+    // Try every combination of alternatives (usually one segment with up to 5 guesses) and keep the one the brain understands best.
+    let cands = [""];
+    for (const alts of finals) cands = cands.flatMap((c) => alts.slice(0, 5).map((a) => (c + " " + a).trim())).slice(0, 25);
+    let best = cands[0], bestScore = -1;
+    for (const c of cands) { const sc = think(c, false).score; if (sc > bestScore) { best = c; bestScore = sc; } }
+    ask(best, true);
   };
   rec.start();
+}
+
+async function listenWhisper() {
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+  } catch {
+    reply({ say: "I can't hear you without microphone access. You can type instead." }, false);
+    return;
+  }
+  const type = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/ogg;codecs=opus"].find((t) => MediaRecorder.isTypeSupported?.(t)) || "";
+  const mr = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
+  const chunks = [];
+  mr.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+
+  // simple voice-activity detection: stop after ~1.3 s of silence once speech has started
+  const ac = new (window.AudioContext || window.webkitAudioContext)();
+  const an = ac.createAnalyser(); an.fftSize = 1024;
+  ac.createMediaStreamSource(stream).connect(an);
+  const buf = new Float32Array(an.fftSize);
+  let spoke = false, quietSince = performance.now(), started = performance.now(), raf = 0, done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    cancelAnimationFrame(raf);
+    if (mr.state !== "inactive") mr.stop();
+  };
+  stopRecording = finish;
+  const watch = () => {
+    an.getFloatTimeDomainData(buf);
+    let rms = 0; for (const v of buf) rms += v * v; rms = Math.sqrt(rms / buf.length);
+    micLevel = Math.min(1, rms * 12);
+    const now = performance.now();
+    if (rms > 0.025) { spoke = true; quietSince = now; }
+    if ((spoke && now - quietSince > 1300) || (!spoke && now - started > 6000) || now - started > 12000) return finish();
+    raf = requestAnimationFrame(watch);
+  };
+
+  mr.onstop = async () => {
+    listening = false; stopRecording = null; micLevel = 0;
+    stream.getTracks().forEach((t) => t.stop()); ac.close();
+    if (!spoke) { setState("idle"); $("you").textContent = ""; reply({ say: "I didn't catch anything. Tap the orb and try again." }, false); return; }
+    setState("thinking");
+    $("you").textContent = "Transcribing…";
+    try {
+      const blob = new Blob(chunks, { type: mr.mimeType || type || "audio/webm" });
+      const r = await fetch("/api/transcribe", { method: "POST", headers: { "Content-Type": "application/octet-stream", "X-Audio-Type": blob.type }, body: blob });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || "transcription failed");
+      if (!j.text) { setState("idle"); reply({ say: "I didn't catch that. Tap the orb and try again, or type." }, false); return; }
+      ask(j.text, true);
+    } catch {
+      whisper = false; paintEngine();   // fall back to the browser engine for the rest of the visit
+      setState("idle");
+      reply({ say: "My speech service is busy right now. Tap the orb again and I'll use the browser's recognition, or type." }, false);
+    }
+  };
+  mr.start();
+  listening = true; setState("listening"); $("you").textContent = "Listening… tap the orb when you're done";
+  watch();
+}
+
+function paintEngine() {
+  const el = $("engine");
+  if (!el) return;
+  el.textContent = whisper ? "Speech: Whisper, any accent or language" : SR ? `Speech: browser, ${ACCENTS.find(([v]) => v === accent)?.[1] || "Auto"} English` : "Speech: type to ask";
+  $("accent-wrap").hidden = whisper || !SR;
 }
 
 /* ------------------------------------------------------------------ dialog */
@@ -250,6 +413,12 @@ function reply(r, talk = true) {
     sayEl.textContent = text.slice(0, i);
     if (i >= text.length) {
       clearInterval(typeTimer);
+      for (const q of r.suggest || []) {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "btn"; b.textContent = q;
+        b.addEventListener("click", () => ask(q));
+        acts.appendChild(b);
+      }
       for (const [label, href] of r.links || []) {
         const a = document.createElement("a");
         a.className = "btn"; a.textContent = label; a.href = href;
@@ -264,16 +433,20 @@ function reply(r, talk = true) {
   if (r.scroll) setTimeout(() => document.querySelector(r.scroll)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }), 900);
   if (talk) speak(text, after);
   else after();
-  if (r.chips) $("chips").scrollIntoView?.({ block: "nearest" });
 }
 
-function ask(q) {
+function ask(q, fromVoice = false) {
   q = String(q || "").trim();
   if (!q) return;
   $("you").textContent = "› " + q;
   setState("thinking");
   setTimeout(() => {
-    const r = think(q);
+    let r = think(q);
+    if (r.fallback) {
+      r = fromVoice
+        ? { say: `I may have misheard. I caught "${q}". Did you mean one of these? You can also tap the orb and try again, or type.`, suggest: suggestions(q) }
+        : { say: "That one isn't in my files. Try asking about Bibek's projects, skills, education, or how to get in touch.", suggest: suggestions(q) };
+    }
     if (!voiceOn || !("speechSynthesis" in window)) setState("idle");
     reply(r);
   }, 380);
@@ -311,7 +484,9 @@ function orb() {
     requestAnimationFrame(frame);
     if (!onScreen || document.hidden) return;
     const t = (now - t0) / 1000, R = w / 2;
-    const target = state === "speaking" ? 0.55 + 0.45 * wordPulse : state === "listening" ? 0.6 + 0.25 * Math.sin(t * 8) : state === "thinking" ? 0.5 : 0.12;
+    const target = state === "speaking" ? 0.55 + 0.45 * wordPulse
+      : state === "listening" ? (micLevel > 0 ? 0.35 + 0.65 * micLevel : 0.6 + 0.25 * Math.sin(t * 8))
+      : state === "thinking" ? 0.5 : 0.12;
     energy += (target - energy) * 0.12;
     wordPulse *= 0.9;
     const spin = reduce ? 0 : t;
@@ -388,6 +563,21 @@ $("chips").addEventListener("click", (e) => {
   const b = e.target.closest("button");
   if (b) ask(b.textContent);
 });
+const sel = $("accent");
+if (sel) {
+  for (const [v, label] of ACCENTS) {
+    const o = document.createElement("option");
+    o.value = v; o.textContent = v === "auto" ? `Auto (${autoLang()})` : label;
+    sel.appendChild(o);
+  }
+  sel.value = ACCENTS.some(([v]) => v === accent) ? accent : "auto";
+  sel.addEventListener("change", () => {
+    accent = sel.value;
+    try { localStorage.setItem("jarvis-accent", accent); } catch {}
+    paintEngine();
+  });
+}
+paintEngine();
 const vt = $("voice-toggle");
 try { voiceOn = localStorage.getItem("jarvis-voice") !== "off"; } catch {}
 const paintVoice = () => (vt.textContent = `Voice: ${voiceOn ? "on" : "off"}`);

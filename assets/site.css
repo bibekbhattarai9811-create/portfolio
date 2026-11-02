@@ -418,3 +418,10 @@
     .jv-top .hide-sm { display: none; }
     body::after { display: none; }
   }
+
+  .vrow { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .vrow .voice-toggle { margin: 0; }
+  .vrow label { display: inline-flex; gap: 8px; align-items: center; }
+  .vrow select { background: #06111c; color: var(--accent); border: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; padding: 4px 6px; max-width: 200px; }
+  .engine { display: block; margin-top: 8px; font-size: 10.5px; opacity: .8; }
+  .dialog .acts button.btn { height: 34px; font-size: 13px; cursor: pointer; background: none; }
