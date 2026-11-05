@@ -74,6 +74,44 @@ CASES = [
         ],
     },
     {
+        "slug": "jarvis",
+        "title": "JARVIS",
+        "kicker": "Case study 00 · AI assistant · 2026",
+        "lede": "An Iron-Man-style assistant on Claude that runs on my PC, my phone and smart glasses, built to be useful and safe rather than just a demo.",
+        "role": "Product design and full-stack development",
+        "timeline": "October to November 2026, ongoing",
+        "stack": "Next.js, TypeScript, Claude, MediaPipe, Web Speech API, PowerShell, Vitest, GitHub Actions",
+        "links": [("Live demo", "https://jarvis-demo-sandy.vercel.app"), ("Source", "https://github.com/bibekbhattarai9811-create/jarvis")],
+        "cover": ("jarvis", "JARVIS voice assistant with its glowing orb interface", "jarvis-demo-sandy.vercel.app"),
+        "sections": [
+            ("Overview", "The idea", paras(
+                "I wanted a real JARVIS: something I can talk to from across the room, that answers with live information, controls my PC from my phone, and is fun to use.",
+                "It grew into one self-hosted Next.js app with four parts: a voice assistant, a hand-tracked hologram playground, a camera-based inspection tool, and a hands-free field-report demo, all reachable from a PC, a phone or a smart-glasses display.")),
+            ("Approach", "What it does", steps([
+                ("Talk to it", "Say \"Jarvis\" and speak. Common commands (media, timers, opening apps and sites) run instantly, in about 0.3 seconds; everything else goes to Claude with live web search. It answers out loud in a British voice."),
+                ("Control the PC from the phone", "Opening apps, media keys and locking the screen run on the PC itself, so the phone becomes a remote. Apps come from an allowlist and shells are blocked."),
+                ("HOLO", "The camera tracks both hands with MediaPipe. Pinch to grab a hologram, throw it, stretch it with two hands, or smash two together into a blast. It can also cut a real object out of the camera view and turn it into a hologram."),
+                ("Inspect Pro", "Photograph each room of a rental and Claude's vision model writes the report: a condition score, issues marked on the photo, safety alerts and a move-in vs move-out comparison, exported as a branded PDF with signatures."),
+                ("Smart glasses", "A heads-up display designed for Meta Ray-Ban Display glasses shows the latest inspection or field step; I tested it in a built-in simulator."),
+                ("Field Assist demo", "Dictate notes and get a first-person report draft that lists missing facts instead of inventing them, plus a scene diagram, two-way translation and checklists."),
+            ])),
+            ("Decisions", "Key decisions", decisions([
+                ("Security from the start", "An owner PIN and separate guest codes, lockouts after failed attempts, signed cookies, an app allowlist, and images analysed with tools disabled to block prompt injection. It passed 20 out of 20 attack tests."),
+                ("Some things I chose not to build", "Field Assist deliberately has no face recognition or licence-plate lookups of the public, for accuracy, legal and civil-rights reasons."),
+                ("Face recognition only for greetings", "It can recognise my face to say hello, but never uses it to unlock anything, because a photo can fool it."),
+                ("Tested and shareable", "25 automated tests and GitHub Actions run type checks, tests and a build on every push, and a public read-only demo runs on sample data."),
+            ])),
+            ("Results", "Where it stands", stats([("25", "automated tests"), ("20/20", "attack tests passed"), ("0.3 s", "instant commands"), ("3", "devices: PC, phone, glasses")]) + paras(
+                "It runs in the background on my PC, and the live demo lets anyone try the voice assistant and HOLO in their browser.")),
+        ],
+        "gallery": [
+            ("case/jarvis-holo", "HOLO hand-tracked hologram playground", "jarvis · holo", "HOLO: grab, throw, stretch and smash holograms with your hands.", "wide"),
+            ("case/jarvis-inspect", "Inspect Pro report for a bedroom with marked issues", "jarvis · inspect pro", "Inspect Pro: a room photo becomes a scored report with marked issues."),
+            ("case/jarvis-glasses", "Smart-glasses heads-up display showing a completed checklist", "jarvis · glasses hud", "Glasses HUD: the current step, readable at a glance."),
+            ("case/jarvis-diagram", "Scene diagram editor with vehicles, impact point and witness", "jarvis · field assist", "Field Assist: a drag-and-drop scene diagram for the report.", "wide"),
+        ],
+    },
+    {
         "slug": "equipguard",
         "title": "EquipGuard",
         "kicker": "Case study 02 · Machine learning · 2026",
@@ -117,33 +155,38 @@ CASES = [
         "slug": "ai-office",
         "title": "AI Office",
         "kicker": "Case study 00 · AI agents · 2026",
-        "lede": "A small office of AI agents that works on a side business every day, while every outbound action still needs my approval.",
+        "lede": "A small office of AI agents that works on my YouTube channels every day, plus a paper-trading desk, while every outbound action still needs my approval.",
         "role": "Product design and development",
         "timeline": "October 2026, ongoing",
-        "stack": "Next.js, TypeScript, Three.js, Claude, Gemini, Groq, NVIDIA",
+        "stack": "Next.js, TypeScript, Three.js, Claude, Gemini, Groq, NVIDIA, ntfy",
         "links": [],
         "cover": ("aioffice", "Cartoon 3D office where six AI agents work at their desks", "ai office · 3d view"),
         "sections": [
             ("Overview", "The idea", paras(
-                "I wanted help building a side income without doing every step myself: researching niches, drafting outreach, writing posts and keeping track of what happened yesterday.",
-                "AI Office treats that as a team. Six agents with distinct roles work through a daily cycle, and a hard rule keeps me in charge: <strong>agents prepare, I send.</strong>")),
+                "I wanted help growing a side income without doing every step myself: researching topics, drafting titles and posts, and keeping track of what happened yesterday.",
+                "AI Office treats that as a team. Six agents with distinct roles work through a daily cycle, now focused on growing my two YouTube channels, and a hard rule keeps me in charge: <strong>agents prepare, I send.</strong>")),
             ("Approach", "How a day works", steps([
                 ("The CEO plans", "Ada, the CEO agent, reads the mission, the last three reports and my approve/reject decisions, then assigns three to six tasks."),
-                ("The team works in order", "Rex researches with live web search and cites sources, Nia analyses, Mia writes marketing, Bo writes specs and Otto handles operations. Each agent can see what earlier teammates produced."),
-                ("Nothing leaves without me", "Posts, emails, DMs, sign-ups and any spending land in an Approvals tab. Nothing is ever sent automatically."),
-                ("A report that feeds tomorrow", "The CEO writes a daily report ending in a NEXT GOAL, which becomes the starting point of the next cycle."),
+                ("The team works in order", "Rex researches with live web search and cites sources, Nia analyses, Mia writes titles, posts and SEO, Bo writes specs and Otto handles operations. Each agent sees what earlier teammates produced."),
+                ("Nothing leaves without me", "Posts, emails, DMs, sign-ups and any spending land in an Approvals tab. New videos from VideoForge arrive there for review too."),
+                ("A report that feeds tomorrow", "The CEO writes a daily report ending in a NEXT GOAL, and a morning brief is pushed to my phone."),
             ])),
+            ("Trading desk", "A paper-trading desk", paras(
+                "I added an 11-role trading team (chart scanner, news monitor, entry timer, exit planner, risk manager, budget manager, order executor and more) that trades a <strong>$1,000 paper account</strong>, never real money.",
+                "Setups are scored on VWAP, moving averages, RSI, volume and nearness to the session high, with 1% risk per trade, a daily loss stop, at most two open positions and no trades near earnings. A trading journal writes a daily entry and a weekly scorecard.",
+                "A Strategy Lab backtests rule sets across 12 symbols. The honest first result: over 60 days, every rule set lost money. Stocks came out roughly flat, and on crypto the fees alone (about 0.8% per round trip) were as large as the whole stop distance. That evidence now drives which markets the desk is allowed to trade.")),
             ("Decisions", "Key decisions", decisions([
-                ("Every agent has a fallback chain", "Each agent tries its preferred model first and falls through Claude, Gemini, Groq and NVIDIA. Free models get retired often, so every runner walks a list of models instead of hard-coding one."),
-                ("Runs itself every morning", "A scheduled task runs the cycle at 8 AM, catches up when the PC wakes or I log in, runs at most once per day, and gives every step a deadline so one hung web search can't block the day."),
-                ("Human approval as a feature", "The approval queue isn't a limitation, it's the product. It makes it safe to let agents draft real outreach."),
-                ("Make the work visible", "A cartoon 3D office shows the agents at their desks, walking to the CEO when a task is done and sending documents to my inbox when something needs approval."),
+                ("Every agent has a fallback chain", "Each agent tries its preferred model first and falls through Claude, Gemini, Groq and NVIDIA. Free models get retired often, so every runner walks a list of models."),
+                ("Runs itself every morning", "A scheduled task runs the cycle at 8 AM, catches up when the PC wakes, runs at most once per day, and gives every step a deadline so one hung web search can't block the day."),
+                ("Paper only, research framing", "The desk can't place real trades, and its output is labelled as research, not financial advice."),
+                ("Make the work visible", "A cartoon 3D office shows the agents at their desks and the traders on a trading floor with live screens, and it can push trades and alerts to my phone."),
             ])),
-            ("Results", "Where it stands", stats([("6", "agents with distinct roles"), ("4", "AI providers with fallback"), ("1", "cycle per day, scheduled")]) + paras(
-                "The office runs every morning on my PC and is researching a first business idea with me.")),
+            ("Results", "Where it stands", stats([("6", "office agents"), ("11", "trading-desk roles"), ("4", "AI providers with fallback"), ("1", "cycle per day, scheduled")]) + paras(
+                "The office runs every morning on my PC, researching topics and titles for my channels, and the desk keeps paper-trading and backtesting.")),
         ],
         "gallery": [
             ("case/aioffice-dashboard", "AI Office dashboard with agent status cards and the approvals tab", "ai office · dashboard", "The dashboard: what each agent is doing, the goal for the cycle and the approvals waiting for me.", "wide"),
+            ("case/aioffice-desk", "Paper trading desk with equity, win rate and the trading roles", "ai office · trading desk", "The paper-trading desk: equity curve, win rate and what each role is doing.", "wide"),
         ],
     },
     {
@@ -249,35 +292,36 @@ CASES = [
     {
         "slug": "videoforge",
         "title": "VideoForge",
-        "kicker": "Case study 05 · Automation · 2026",
-        "lede": "Idea in, finished video out: the production pipeline behind my engineering-failure channel, Why It Broke.",
+        "kicker": "Case study 00 · Automation · 2026",
+        "lede": "From idea to finished video on autopilot: the production system behind my two YouTube channels.",
         "role": "Product design and development",
-        "timeline": "October 2026",
-        "stack": "Next.js, TypeScript, Python, MoviePy, Microsoft neural voices, Claude",
+        "timeline": "October 2026, ongoing",
+        "stack": "Next.js, TypeScript, Python, MoviePy, Claude, Chatterbox voice cloning, faster-whisper, numpy",
         "links": [],
-        "cover": ("videoforge", "VideoForge new video screen", "videoforge · local app"),
+        "cover": ("videoforge-shorts", "Three Why It Broke Shorts made by VideoForge", "videoforge · finished shorts"),
         "sections": [
             ("Overview", "The problem", paras(
-                "Making one Why It Broke episode took hours: writing the script in a chat window, recording voice files, generating clips, collecting archival footage, then placing everything by hand in a video editor.",
-                "Most of that time went into mechanical work: lining shots up with the narration, adding zooms and captions, trimming and exporting. That's exactly what software is good at.")),
-            ("Approach", "The pipeline", steps([
-                ("Plan", "Type an idea. Claude writes the script, shot list, image and video prompts, the cue word each shot should land on, and the title, description, tags and thumbnail idea."),
-                ("Voice", "Each narration segment is generated with a neural voice, along with word-level timings, or I upload my own recording."),
-                ("Quick draft", "A watchable draft renders immediately, with labelled placeholder cards for shots that aren't made yet, so the pacing can be judged early."),
-                ("Fill in visuals", "Drop in generated clips and archival footage. A per-shot \"skip first seconds\" setting trims footage to the right moment."),
-                ("Auto-edit and export", "Every shot is placed on its cue word, with slow zooms, slow motion, captions, music at 12% and a 1080p export, plus a publish kit with titles and tags ready to copy."),
+                "Making one Why It Broke episode used to take hours: writing the script in a chat window, recording voice files, finding images, then placing everything by hand in a video editor.",
+                "Most of that time was mechanical work that software is good at. So VideoForge first became an editor, then an autopilot that now makes a Short every day.")),
+            ("Approach", "The autopilot", steps([
+                ("Research and script", "Claude researches the topic with web search and writes a fact-checked script with its sources. A second pass polishes it against the facts and rejects big rewrites."),
+                ("Visuals", "It pulls relevant, properly licensed photos from Wikimedia Commons and draws its own animated diagrams for stats, timelines and comparisons."),
+                ("My voice", "Long videos are narrated in my own voice. I record once, and a local voice clone (Chatterbox, running on my laptop's CPU) reads new scripts; my own recordings are aligned word by word with Whisper."),
+                ("Music and edit", "It composes an original background track in code, so there's no copyright risk, then edits everything to the narration with captions and a 1080p export."),
+                ("Package", "Every video gets a title, a description with sources and photo credits, tags, three thumbnail options to A/B test, and three auto-picked clips cut into extra Shorts."),
             ])),
             ("Decisions", "Key decisions", decisions([
-                ("A custom timeline, about 7× faster", "MoviePy's built-in compositing was too slow for long videos, so the editor renders through a single custom clip that decides frame by frame which shot is visible."),
-                ("Keep humans where they add value", "AI video generation stays a copy-paste step in the Gemini app. It isn't available through a free API, and choosing the right clip is still a creative call."),
-                ("Runs locally, works anywhere", "Rendering happens on my PC. An optional password-protected tunnel lets me start and check renders from my phone."),
-                ("Editable at every step", "Any narration line can be edited, and its voice is regenerated automatically on the next render."),
+                ("My voice, not a stock AI voice", "Long videos use my own voice, to stay clear of YouTube's policy on fully automated content and to sound like a real channel."),
+                ("A custom timeline, about 7x faster", "MoviePy's built-in compositing was too slow for long videos, so the editor renders through a single custom clip that decides frame by frame which shot is visible."),
+                ("Ad-friendly by design", "The true-crime channel only covers solved, convicted cases, with no gore and careful wording, so episodes stay advertiser-friendly."),
+                ("I stay the editor", "Finished videos land in my AI Office inbox and an upload folder for review; nothing is published without me."),
             ])),
-            ("Results", "Outcome", paras(
-                "What used to take hours of manual editing is now mostly waiting for a render. I've used it to plan and render episodes on the Silver Bridge and Hyatt Regency walkway collapses.")),
+            ("Results", "Two channels", stats([("1/day", "Shorts, made automatically"), ("2", "channels"), ("9-12 min", "long videos in my voice"), ("3", "thumbnail options per video")]) + paras(
+                "<strong>Why It Broke</strong> covers engineering failures, from the Tacoma Narrows Bridge and the I-35W collapse to the Teton Dam and the Boeing 737 MAX. <strong>Case Closed Files</strong> tells solved true-crime cases twice a week, each with a teaser Short.")),
         ],
         "gallery": [
             ("case/videoforge-project", "VideoForge project page for the Silver Bridge episode with video preview", "videoforge · project", "A project page: draft preview, voice settings and the shot list.", "wide"),
+            ("videoforge", "VideoForge new video screen with idea, format, length and voice options", "videoforge · new video", "Starting a video: idea, channel, format, length and voice."),
         ],
     },
 ]
